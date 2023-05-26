@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/Registro.css">
+    <script src="../JS/Registro.js"></script>  
+    <title>Registro</title>
+</head>
+
+<body onload="recibirPaises()">
+    
+    <h2>Registro de la muerte</h2>
+
+    <label for="user">Nombre de usuario:</label>
+    <input type="text" name="Nombre de usuario" id="user"> <br>
+
+    <label for="mail">Email:</label>
+    <input type="text" name="Email" id="mail"> <br>
+    
+    <label for="pass">Contraseña:</label>
+    <input type="password" name="Contraseña" id="pass"> <br>
+
+    <label for="passRepetido"> Repite la contraseña:</label>
+    <input type="password" name="ContraseñaRepetido" id="passRepetido"> <br>
+
+    <label for="listaPaises">Lista de paises:</label> 
+    <select name="listaPaises" id="listaPaises">
+
+    </select>
+    <br>
+
+    <input type="checkbox" id="condiciones" name="condiciones">
+    <label for="condiciones">Términos y condiciones</label>
+
+    <button type="submit" onclick="enviar()">Enviar</button>
+    <button type="reset" onclick="resetearCampos()">Reset</button>
+
+    <div id="resultado"></div>
+
+</body>
+</html>
