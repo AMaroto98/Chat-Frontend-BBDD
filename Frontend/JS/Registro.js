@@ -42,7 +42,25 @@ function enviar() {
     let pass = document.getElementById("pass").value;
     let passRepetido = document.getElementById("passRepetido").value;
     let codeCountry = document.getElementById("listaPaises").value;
+    let conditions = document.getElementById("condiciones").checked;
 
+    if (pass != passRepetido) {
+        document.getElementById("resultado").innerHTML = "Las contraseñas no coinciden";
+        document.getElementById("resultado").style.color = "red";
+        return;
+    }
+
+    if (pass.length < 8) {
+        document.getElementById("resultado").innerHTML = "La contraseña debe tener al menos 8 caracteres.";
+        document.getElementById("resultado").style.color = "red";
+        return;
+    }
+
+    if (!conditions) {
+        document.getElementById("resultado").innerHTML = "Acepta los términos y condiciones para poder registrarte";
+        document.getElementById("resultado").style.color = "red";
+        return;
+    }
 
     http.open("POST", "http://localhost:3000/Chat/Register", true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -50,11 +68,13 @@ function enviar() {
 
     http.onreadystatechange = function(){
 
-        if (this.readyState == 4 && this.status == 200) {
-            // Aquí se guarda la respuesta que hacemos con el getWritter de Java
-            // this hace referencia al objeto http que esta arriba, se podría poner en su lugar
-            if (this.responseText =="ok") {
-                document.getElementById("resultat").innerHTML = "Estás loggeado";
+        let respuesta = http.responseText;
+
+        if (http.readyState == 4 && http.status == 200) {
+
+            if (respuesta == "true") {
+                document.getElementById("resultado").innerHTML = "Registrado con éxito";
+                document.getElementById("resultado").style.color = "green";
             }
         }
     }
