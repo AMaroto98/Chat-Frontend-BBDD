@@ -6,8 +6,6 @@ function añadirAmigo() {
     let codigoSesion = sessionStorage.getItem("session");
     let friend = document.getElementById("friend").value;
 
-    console.log(mail + " " + codigoSesion + " " + friend);
-
     http.open("POST", "http://localhost:3000/Chat/Friend", true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http.send("mail=" + mail + "&session=" + codigoSesion + "&friend=" + friend);
@@ -15,8 +13,6 @@ function añadirAmigo() {
     http.onreadystatechange = function(){
 
         let respuesta = http.responseText;
-
-        console.log(respuesta)
 
         if (http.readyState == 4 && http.status == 200) {
 
@@ -47,15 +43,35 @@ function añadirAmigo() {
 
 function recibirAmigos() {
 
-    // var http = new XMLHttpRequest();
+    var http = new XMLHttpRequest();
 
-    // let mail = sessionStorage.getItem("mail");
-    // let codigoSesion = sessionStorage.getItem("session");
-   
-    // console.log(mail + " " + codigoSesion + " " + friend);
+    let mail = sessionStorage.getItem("mail");
+    let codigoSesion = sessionStorage.getItem("session");
 
-    // http.open("POST", "http://localhost:3000/Chat/Friend", true);
-    // http.send();
+    http.open("GET", "http://localhost:3000/Chat/Friend?mail="+mail+"&session="+codigoSesion, true);
+    http.send();
 
 
+    http.onreadystatechange = function(){
+
+        let respuesta = http.responseText;
+
+        console.log(respuesta);
+
+        if (http.readyState == 4 && http.status == 200) {
+
+            let jsonString = http.responseText;
+            let arrayAmigos = JSON.parse(jsonString);
+            let selectElement = document.getElementById("listaAmigos");
+
+            for (let i in arrayAmigos) {
+
+                let amigo = arrayAmigos[i];
+                let option = document.createElement("option");
+                option.text = amigo;
+                selectElement.add(option);
+
+            }
+        }
+    }
 }
