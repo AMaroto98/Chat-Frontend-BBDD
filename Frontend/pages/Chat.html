@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/Chat.css">
+    <script src="../JS/Chat.js"></script>  
+    <title>Chat</title>
 </head>
-<body>
+
+<body onload="recibirAmigos()">
+
     <h1>Chat</h1>
+
+    <label for="friend">Email de tu amigo:</label>
+    <input type="text" name="friend" id="friend">
+    <button onclick="añadirAmigo()">Añadir amigo</button>
+    <br>
+
+    <div id="resultado"></div>
+
+    <label for="listaAmigos">Lista de amigos:</label> 
+    <select name="listaAmigos" id="listaAmigos">
+
+    </select> <br>
+
+    <div id="chat"></div>
 </body>
 </html>
