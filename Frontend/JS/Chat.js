@@ -51,12 +51,7 @@ function recibirAmigos() {
     http.open("GET", "http://localhost:3000/Chat/Friend?mail="+mail+"&session="+codigoSesion, true);
     http.send();
 
-
     http.onreadystatechange = function(){
-
-        let respuesta = http.responseText;
-
-        console.log(respuesta);
 
         if (http.readyState == 4 && http.status == 200) {
 
