@@ -9,24 +9,38 @@
     <title>Chat</title>
 </head>
 
-<body onload="recibirAmigos()">
+<body onload="recibirAmigos(); recibirMensaje(); crearTitulo()">
 
-    <h1>Chat</h1>
+    <header>
 
-    <button onclick="cerrarSesion()">Cerrar sesión</button>
+        <h1 id="titulo"></h1>
 
-    <label for="friend">Email de tu amigo:</label>
-    <input type="text" name="friend" id="friend">
-    <button onclick="añadirAmigo()">Añadir amigo</button>
-    <br>
+    </header>
 
-    <div id="resultado"></div>
+    <nav>
 
-    <label for="listaAmigos">Lista de amigos:</label> 
-    <select name="listaAmigos" id="listaAmigos">
+        <label for="friend">Email de tu amigo:</label>
+        <input type="text" name="friend" id="friend">
+        <button onclick="añadirAmigo()">Añadir amigo</button>
+        <br>
 
-    </select> <br>
+        <div id="resultado"></div>
+
+        <label for="listaAmigos">Lista de amigos:</label> 
+        <select name="listaAmigos" id="listaAmigos">
+
+        </select> <br>
+
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+
+    </nav>
+
 
     <div id="chat"></div>
+
+    <input type="text" name="sms" id="sms" placeholder="Enviar mensaje">
+    <button onclick="enviarMensaje()">Enviar</button>
+    <br>
+
 </body>
 </html>
