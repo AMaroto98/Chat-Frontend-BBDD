@@ -25,6 +25,7 @@ function añadirAmigo() {
 
                 document.getElementById("resultado").innerHTML = "Amigo añadido con éxito";
                 document.getElementById("resultado").style.color = "green";
+                recibirAmigos();
 
             } else if(respuesta == "2") {
 
@@ -74,4 +75,57 @@ function recibirAmigos() {
 function cerrarSesion() {
     sessionStorage.clear();
     window.location.href = "../Login.html";
+}
+
+function recibirMensaje() {
+
+    var http = new XMLHttpRequest();
+
+    let mail = sessionStorage.getItem("mail");
+    let codigoSesion = sessionStorage.getItem("session");
+
+    http.open("GET", "http://localhost:3000/Chat/Xat?mail="+mail+"&session="+codigoSesion, true);
+    http.send();
+
+    http.onreadystatechange = function(){
+
+        if (http.readyState == 4 && http.status == 200) {
+
+            let jsonString = http.responseText;
+            let respuesta = JSON.parse(jsonString);
+
+            console.log(respuesta);
+
+            let chat = document.querySelector("#chat");
+            chat.innerHTML += respuesta.emisor + ": " + respuesta.text + "<br>";
+            recibirMensaje();
+        }
+    }
+}
+
+
+function enviarMensaje() {
+
+    var http = new XMLHttpRequest();
+
+    let mail = sessionStorage.getItem("mail");
+    let codigoSesion = sessionStorage.getItem("session");
+    let receptor = document.getElementById("listaAmigos").value;
+    let sms = document.getElementById("sms").value;
+
+    console.log(mail + " " + codigoSesion + " " + receptor + " " + sms);
+    http.open("POST", "http://localhost:3000/Chat/Xat", true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.send("mail=" + mail + "&session=" + codigoSesion + "&receptor=" + receptor + "&sms=" + sms);
+}
+
+function crearTitulo() {
+    let mail = sessionStorage.getItem("mail");
+    let nombre = mail.split("@");
+
+    let primeraLetra = nombre[0].charAt(0).toUpperCase();
+    let restoDelNombre = nombre[0].slice(1);
+    let nombreCompleto = primeraLetra + restoDelNombre;
+    
+    document.querySelector("#titulo").innerHTML = "Bienvenido " + nombreCompleto;
 }
