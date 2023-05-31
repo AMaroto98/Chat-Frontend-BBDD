@@ -28,7 +28,7 @@ function añadirAmigo() {
 
             } else if(respuesta == "2") {
 
-                document.getElementById("resultado").innerHTML = "Amigo no encotrado";
+                document.getElementById("resultado").innerHTML = "Amigo no encontrado";
                 document.getElementById("resultado").style.color = "red";
 
             } else {
@@ -69,4 +69,9 @@ function recibirAmigos() {
             }
         }
     }
+}
+
+function cerrarSesion() {
+    sessionStorage.clear();
+    window.location.href = "../Login.html";
 }
