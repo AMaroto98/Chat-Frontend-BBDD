@@ -12,6 +12,12 @@ CREATE TABLE `amistad` (
   `mail2` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE `message` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `origen` varchar(20) NOT NULL,
+  `desti` varchar(20) NOT NULL,
+  `text` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `paises` (
   `Codigo` varchar(2) NOT NULL,
@@ -283,9 +289,15 @@ CREATE TABLE `persona` (
 
 INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "antonio@gmail.com", "1234", "ES");
 
+ALTER TABLE `message`
+  ADD UNIQUE KEY `id` (`id`);
+
 ALTER TABLE `paises`
   ADD PRIMARY KEY (`Codigo`);
 
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`mail`);
+
+ALTER TABLE `message`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 COMMIT;
