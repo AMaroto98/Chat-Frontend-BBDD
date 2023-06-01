@@ -94,10 +94,14 @@ function recibirMensaje() {
             let jsonString = http.responseText;
             let respuesta = JSON.parse(jsonString);
 
-            console.log(respuesta);
+            let nombre = respuesta.emisor.split("@");
+            let primeraLetra = nombre[0].charAt(0).toUpperCase();
+            let restoDelNombre = nombre[0].slice(1);
+            let nombreCompleto = primeraLetra + restoDelNombre;
+        
 
             let chat = document.querySelector("#chat");
-            chat.innerHTML += respuesta.emisor + ": " + respuesta.text + "<br>";
+            chat.innerHTML += nombreCompleto + ": " + respuesta.text + "<br>";
             recibirMensaje();
         }
     }
@@ -113,10 +117,17 @@ function enviarMensaje() {
     let receptor = document.getElementById("listaAmigos").value;
     let sms = document.getElementById("sms").value;
 
-    console.log(mail + " " + codigoSesion + " " + receptor + " " + sms);
     http.open("POST", "http://localhost:3000/Chat/Xat", true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http.send("mail=" + mail + "&session=" + codigoSesion + "&receptor=" + receptor + "&sms=" + sms);
+
+    let nombre = mail.split("@");
+    let primeraLetra = nombre[0].charAt(0).toUpperCase();
+    let restoDelNombre = nombre[0].slice(1);
+    let nombreCompleto = primeraLetra + restoDelNombre;
+
+    let chat = document.querySelector("#chat");
+    chat.innerHTML += nombreCompleto + ": " + sms + "<br>";
 }
 
 function crearTitulo() {
@@ -128,4 +139,8 @@ function crearTitulo() {
     let nombreCompleto = primeraLetra + restoDelNombre;
     
     document.querySelector("#titulo").innerHTML = "Bienvenido " + nombreCompleto;
+}
+
+function limpiarInput() {
+    document.getElementById("sms").value = "";
 }
