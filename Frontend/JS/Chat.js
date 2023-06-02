@@ -1,3 +1,5 @@
+var chatsAsignados = [];
+
 function añadirAmigo() {
 
     var http = new XMLHttpRequest();
@@ -94,19 +96,44 @@ function recibirMensaje() {
             let jsonString = http.responseText;
             let respuesta = JSON.parse(jsonString);
 
+            console.log(respuesta);
+
+            let emisor = respuesta.emisor;
+            let indiceEmisor = chatsAsignados.indexOf(emisor);
+
             let nombre = respuesta.emisor.split("@");
             let primeraLetra = nombre[0].charAt(0).toUpperCase();
             let restoDelNombre = nombre[0].slice(1);
             let nombreCompleto = primeraLetra + restoDelNombre;
-        
 
-            let chat = document.querySelector("#chat");
-            chat.innerHTML += nombreCompleto + ": " + respuesta.text + "<br>";
+            console.log(indiceEmisor);
+            if (indiceEmisor != -1) {
+
+                let pestaña = document.querySelector("#pestaña-" + indiceEmisor);
+                pestaña.innerHTML = nombreCompleto + "<br>";
+
+                let chat = document.querySelector("#chat-" + indiceEmisor);
+                chat.innerHTML += nombreCompleto + ": " + respuesta.text + "<br>";
+
+            } else if (indiceEmisor == -1 && chatsAsignados.length < 5) {
+
+                chatsAsignados.push(emisor);
+
+                console.log(chatsAsignados);
+
+                let indiceNuevoEmisor = chatsAsignados.indexOf(emisor);
+
+                let pestaña = document.querySelector("#pestaña-" + indiceNuevoEmisor);
+                pestaña.innerHTML = nombreCompleto + "<br>";
+
+                let chat = document.querySelector("#chat-" + indiceNuevoEmisor);
+                chat.innerHTML += nombreCompleto + ": " + respuesta.text + "<br>";
+            } 
+
             recibirMensaje();
         }
     }
 }
-
 
 function enviarMensaje() {
 
@@ -126,7 +153,28 @@ function enviarMensaje() {
     let restoDelNombre = nombre[0].slice(1);
     let nombreCompleto = primeraLetra + restoDelNombre;
 
-    let chat = document.querySelector("#chat");
+    if (!chatsAsignados.includes(receptor) && chatsAsignados.length < 5) {
+        
+        chatsAsignados.push(receptor);
+
+    } else if (!chatsAsignados.includes(receptor) && chatsAsignados.length >= 5) {
+
+        alert("Solo puedes tener 5 conversaciones a la vez");
+    }
+
+    console.log(chatsAsignados);
+
+    let nombreReceptor = receptor.split("@");
+    let primeraLetraReceptor = nombreReceptor[0].charAt(0).toUpperCase();
+    let restoDelNombreReceptor = nombreReceptor[0].slice(1);
+    let nombreCompletoReceptor = primeraLetraReceptor + restoDelNombreReceptor;
+
+    let posicionReceptor = chatsAsignados.indexOf(receptor);
+
+    let pestaña = document.querySelector("#pestaña-" + posicionReceptor);
+    pestaña.innerHTML = nombreCompletoReceptor + "<br>";
+
+    let chat = document.querySelector("#chat-" + posicionReceptor);
     chat.innerHTML += nombreCompleto + ": " + sms + "<br>";
 }
 
@@ -143,4 +191,29 @@ function crearTitulo() {
 
 function limpiarInput() {
     document.getElementById("sms").value = "";
+}
+
+function seleccionartPestaña(index) {
+
+    // Bucle para seleccionar la pestaña
+    let pestaña = document.getElementsByClassName("pestaña");
+
+    for (let i = 0; i < pestaña.length; i++) {
+      if (i === index) {
+        pestaña[i].classList.add("selected");
+      } else {
+        pestaña[i].classList.remove("selected");
+      }
+    }
+
+    // Bucle para mostrar el contenido de cada chat
+    let chat = document.getElementsByClassName("chat");
+
+    for (let j = 0; j < chat.length; j++) {
+      if (j === index) {
+        chat[j].classList.add("active");
+      } else {
+        chat[j].classList.remove("active");
+      }
+    }
 }
