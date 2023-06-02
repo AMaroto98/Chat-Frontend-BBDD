@@ -5,16 +5,82 @@ header {
     margin-bottom: 15px;
 }
 
-
-
 nav {
-    border: 1px solid black;   
-
-}
-
-
-#chat{
-    width:250px;
-    height:120px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     border: 1px solid black;    
+
 }
+
+nav label, nav input, nav button, nav select {
+    margin: 5px;
+}
+
+nav button {
+    display: block;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4caf50;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#cerrarSesion {
+    
+    background-color: #f44336;
+}
+
+
+#chat {
+    width: 70%;
+    height: 400px;
+    border: 1px solid #000000;
+    overflow-y: scroll;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between  ;
+}
+
+.pestaña {
+    border: 1px solid #000000;
+    width: 100%;
+}
+
+
+
+
+.container {
+    display: flex;
+
+    border: #000000 2px solid;
+}
+
+#chat-container {
+    border: #000000 2px solid;
+}
+  
+.pestaña {
+    flex: 1;
+    border: 1px solid #329637;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Pestaña seleccionada */
+.pestaña.selected {
+    background-color: #cc2e2e;
+}
+
+/* Se oculta todo el contenido */
+.chat {
+    display: none;
+}
+
+/* Se enseña el contenido seleccionado */
+.chat.active {
+    display: block;
+    background-color: aqua;
+}  
