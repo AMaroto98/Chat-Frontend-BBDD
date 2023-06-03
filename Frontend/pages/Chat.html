@@ -13,64 +13,60 @@
 
     <header>
 
-        <h1 id="titulo"></h1>
+      <h1 id="titulo"></h1>
 
     </header>
 
     <nav>
 
-        <label for="friend">Email de tu amigo:</label>
-        <input type="text" name="friend" id="friend">
-        <button onclick="añadirAmigo()">Añadir amigo</button>
-        <br>
+      <label for="friend">Email de tu amigo:</label>
+      <input type="text" name="friend" id="friend">
+      <button onclick="añadirAmigo()" id="añadirAmigo">Añadir amigo</button>
+      <br>
 
-        <div id="resultado"></div>
+      <div id="resultado"></div>
 
-        <label for="listaAmigos">Lista de amigos:</label> 
-        <select name="listaAmigos" id="listaAmigos">
+      <label for="listaAmigos">Lista de amigos:</label> 
+      <select name="listaAmigos" id="listaAmigos">
 
-        </select> <br>
+      </select> <br>
 
-        <button onclick="cerrarSesion()" id="cerrarSesion">Cerrar sesión</button>
+
+      <button onclick="cerrarSesion()" id="cerrarSesion">Cerrar sesión</button>
 
     </nav>
 
     <div class="container">
-        <div class="pestaña" id="pestaña-0" onclick="seleccionartPestaña(0)">Chat Disponible</div>
-        <div class="pestaña" id="pestaña-1" onclick="seleccionartPestaña(1)">Chat Disponible</div>
-        <div class="pestaña" id="pestaña-2" onclick="seleccionartPestaña(2)">Chat Disponible</div>
-        <div class="pestaña" id="pestaña-3" onclick="seleccionartPestaña(3)">Chat Disponible</div>
-        <div class="pestaña" id="pestaña-4" onclick="seleccionartPestaña(4)">Chat Disponible</div>
+      <div class="pestaña" id="pestaña-0" onclick="seleccionartPestaña(0)">Chat Disponible</div>
+      <div class="pestaña" id="pestaña-1" onclick="seleccionartPestaña(1)">Chat Disponible</div>
+      <div class="pestaña" id="pestaña-2" onclick="seleccionartPestaña(2)">Chat Disponible</div>
+      <div class="pestaña" id="pestaña-3" onclick="seleccionartPestaña(3)">Chat Disponible</div>
+      <div class="pestaña" id="pestaña-4" onclick="seleccionartPestaña(4)">Chat Disponible</div>
     </div>
       
     <div id="chat-container">
 
       <div class="chat" id="chat-0">
-        <h2>Contenido del Chat 1</h2>
       </div>
 
       <div class="chat" id="chat-1">
-        <h2>Contenido del Chat 2</h2>
       </div>
 
       <div class="chat" id="chat-2">
-        <h2>Contenido del Chat 3</h2>
       </div>
 
       <div class="chat" id="chat-3">
-        <h2>Contenido del Chat 4</h2>
       </div>
 
       <div class="chat" id="chat-4">
-        <h2>Contenido del Chat 5</h2>
-        </div>
+      </div>
 
     </div>
-      
     
-
-    <input type="text" name="sms" id="sms" placeholder="Enviar mensaje">
-    <button onclick="enviarMensaje(); limpiarInput()">Enviar</button>
+    <div class="container-boton">
+      <input type="text" name="sms" id="sms" placeholder="Enviar mensaje" class="input">
+      <button onclick="enviarMensaje(); limpiarInput()" class="button">Enviar</button>
+    </div>    
     <br>
 
 </body>
