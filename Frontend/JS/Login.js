@@ -3,11 +3,20 @@ function enviar() {
     var http = new XMLHttpRequest();
 
     let mail = document.getElementById("mail").value;
-    let pass = document.getElementById("pass").value;
+    let contraseña = document.getElementById("pass").value;
 
-    // True indica que es asincrono
-    http.open("GET", "http://localhost:3000/Chat/Login?mail="+mail+"&pass="+pass, true);
-    http.send();
+    cifrarContraseña(contraseña)
+        .then(hash => {
+        let pass = hash;
+        console.log('Contraseña cifrada:', pass);
+
+        // True indica que es asincrónico
+        http.open("GET", "http://localhost:3000/Chat/Login?mail="+mail+"&pass="+pass, true);
+        http.send();
+    })
+        .catch(error => {
+        console.error('Error al cifrar la contraseña:', error);
+    });
 
     http.onreadystatechange = function(){
 
@@ -38,14 +47,23 @@ function resetearCampos() {
 
 function irChat() {
 
-    // Obtengo el valor del sessionStorage
     let codigoSesion = sessionStorage.getItem("session");
 
-    // Verifica si se ha guardado la información
     if (codigoSesion != 0) {
 
-        // Redirigir a la página de Gestión
         window.location.href = "../Frontend/pages/Chat.html";
-
     }
+}
+
+function cifrarContraseña(contraseña) {
+    
+    const encoder = new TextEncoder();
+    const data = encoder.encode(contraseña);
+
+    return window.crypto.subtle.digest('SHA-256', data)
+        .then(hashBuffer => {
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return hashHex.toUpperCase(); // Convertir a mayúsculas
+    });
 }
