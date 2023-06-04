@@ -281,13 +281,39 @@ INSERT INTO `paises` (`Codigo`, `Pais`) VALUES
 CREATE TABLE `persona` (
   `user` varchar(50) NOT NULL,
   `mail` varchar(50) NOT NULL,
-  `pass` varchar(50) NOT NULL,
+  `pass` varchar(250) NOT NULL,
   `last_log` date DEFAULT NULL,
   `session` varchar(9) DEFAULT NULL,
   `country` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "antonio@gmail.com", "1234", "ES");
+INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "antonio@gmail.com", "EF797C8118F02DFB649607DD5D3F8C7623048C9C063D532CC95C5ED7A898A64F", "ES");
+INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "mario@gmail.com", "EF797C8118F02DFB649607DD5D3F8C7623048C9C063D532CC95C5ED7A898A64F", "ES");
+INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "jaume@gmail.com", "EF797C8118F02DFB649607DD5D3F8C7623048C9C063D532CC95C5ED7A898A64F", "ES");
+INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "nuria@gmail.com", "EF797C8118F02DFB649607DD5D3F8C7623048C9C063D532CC95C5ED7A898A64F", "ES");
+INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "estela@gmail.com", "EF797C8118F02DFB649607DD5D3F8C7623048C9C063D532CC95C5ED7A898A64F", "ES");
+INSERT INTO persona (user, mail, pass, country) VALUES ("Usuario", "juan@gmail.com", "EF797C8118F02DFB649607DD5D3F8C7623048C9C063D532CC95C5ED7A898A64F", "ES");
+
+
+INSERT INTO amistad (mail1, mail2) VALUES ("antonio@gmail.com", "jaume@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("antonio@gmail.com", "mario@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("antonio@gmail.com", "nuria@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("antonio@gmail.com", "estela@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("antonio@gmail.com", "juan@gmail.com");
+
+
+INSERT INTO amistad (mail1, mail2) VALUES ("mario@gmail.com", "jaume@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("mario@gmail.com", "antonio@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("mario@gmail.com", "nuria@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("mario@gmail.com", "juan@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("mario@gmail.com", "estela@gmail.com");
+
+INSERT INTO amistad (mail1, mail2) VALUES ("jaume@gmail.com", "mario@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("jaume@gmail.com", "antonio@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("jaume@gmail.com", "nuria@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("jaume@gmail.com", "juan@gmail.com");
+INSERT INTO amistad (mail1, mail2) VALUES ("jaume@gmail.com", "estela@gmail.com");
+
 
 ALTER TABLE `message`
   ADD UNIQUE KEY `id` (`id`);
