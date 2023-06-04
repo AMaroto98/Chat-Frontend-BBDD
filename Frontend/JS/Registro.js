@@ -62,9 +62,18 @@ function enviar() {
         return;
     }
 
-    http.open("POST", "http://localhost:3000/Chat/Register", true);
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.send("user=" + user + "&mail=" + mail + "&pass=" + pass + "&codeCountry=" + codeCountry);
+    cifrarContraseña(pass)
+        .then(hash => {
+        let pass = hash;
+        console.log('Contraseña cifrada:', pass);
+
+        http.open("POST", "http://localhost:3000/Chat/Register", true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.send("user=" + user + "&mail=" + mail + "&pass=" + pass + "&codeCountry=" + codeCountry);
+    })
+        .catch(error => {
+        console.error('Error al cifrar la contraseña:', error);
+    });
 
     http.onreadystatechange = function(){
 
@@ -78,4 +87,16 @@ function enviar() {
             }
         }
     }
+}
+
+function cifrarContraseña(contraseña) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(contraseña);
+
+    return window.crypto.subtle.digest('SHA-256', data)
+        .then(hashBuffer => {
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return hashHex.toUpperCase();
+    });
 }
